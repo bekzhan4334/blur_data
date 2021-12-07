@@ -17,10 +17,18 @@ for i, el in enumerate(data.splitlines()):
         continue
     el = el.split()
     try:
-        x,y,w,h = int(el[6]), int(el[7]), int(el[8]), int(el[9])
-        cv2.rectangle(img,(x,y), (w+x,h+y),(0,0,255),1)
+        x, y, w, h = int(el[6]), int(el[7]), int(el[8]), int(el[9])
+        if el[11]=='ANDREI':
+            cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 1)
+            # Grab ROI with Numpy slicing and blur
+
+            ROI = img[y:y + h, x:x + w]
+            blur = cv2.GaussianBlur(ROI, (23, 23), 0)
+            img[y:y + h, x:x + w] = blur
     except IndexError:
-        print('Операция была пропущена')
+        print('No data in the image')
+# Insert ROI back into image
+
 # show photo
 cv2.imshow('Result',img)
 cv2.waitKey(0)
