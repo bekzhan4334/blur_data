@@ -4,6 +4,7 @@ import re
 
 #patterns
 name_pattern = '^[A-Z][-a-zA-Z]+$'
+passport_pattern = '^(?!^0+$)[a-zA-Z0-9]{3,20}$'
 
 # path to tesseract.exe
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
@@ -23,7 +24,8 @@ for i, el in enumerate(data.splitlines()):
     el = el.split()
     try:
         x, y, w, h = int(el[6]), int(el[7]), int(el[8]), int(el[9])
-        if re.match(name_pattern, el[11]):
+        if re.match(name_pattern, el[11]) or re.match(passport_pattern, el[11]):
+            #cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  => green rectangle
             # Grab ROI with Numpy slicing and blur
             ROI = img[y:y + h, x:x + w]
             blur = cv2.GaussianBlur(ROI, (23, 23), 0)
