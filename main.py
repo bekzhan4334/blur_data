@@ -9,7 +9,7 @@ passport_pattern = '^(?!^0+$)[a-zA-Z0-9]{3,20}$'
 # path to tesseract.exe
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 # location of the image
-img = cv2.imread('images\exmple.png')
+img = cv2.imread('images\air_ticket.png')
 # converting to RGB
 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 # config for better quality of detecting
